@@ -1,4 +1,5 @@
 {
+  "name": "edmondscommerce/wappalyzer",
   "autoload":{
     "psr-4":{
      "": "src/drivers/php"
