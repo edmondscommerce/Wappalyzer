@@ -10,9 +10,9 @@
 
 	try {
 		// Working directory
-		scriptDir = scriptPath.split('/'); scriptDir.pop(); scriptDir = scriptDir.join('/');
+		//scriptDir = scriptPath.split('/'); scriptDir.pop(); scriptDir = scriptDir.join('/');
 
-		require('fs').changeWorkingDirectory(scriptDir);
+		//require('fs').changeWorkingDirectory(scriptDir);
 
 		require('system').args.forEach(function(arg) {
 			switch ( arg ) {
@@ -100,7 +100,7 @@
 				page = require('webpage').create();
 
 				page.settings.loadImages      = false;
-				page.settings.userAgent       = 'Mozilla/5.0 (compatible; Wappalyzer; +https://github.com/AliasIO/Wappalyzer)';
+				page.settings.userAgent       = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36';
 				page.settings.resourceTimeout = resourceTimeout;
 
 				page.onConsoleMessage = function(message) {
