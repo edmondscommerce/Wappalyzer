@@ -7,12 +7,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV WAPPALYZER_ROOT /home/wappalyzer/synced
 ENV WAPPALYZER_NODE_PATH /home/wappalyzer/node
 
-
 # Install packages
-RUN apt-get update && apt-get install -y curl nodejs npm zip libfreetype6 libfontconfig
+RUN apt-get update && apt-get install -y curl zip libfreetype6 libfontconfig
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+RUN apt-get install -y nodejs
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 
 # Add user
@@ -33,14 +32,7 @@ RUN su wappalyzer -c "mkdir $WAPPALYZER_NODE_PATH"
 
 ADD node/package.json $WAPPALYZER_NODE_PATH/package.json
 
-RUN npm install jsonlint -g && su wappalyzer -c "cd $WAPPALYZER_NODE_PATH && npm install"
-
-
-# Mozilla Add-on SDK
-RUN su wappalyzer -c "\
-	mkdir mozilla && \
-	curl -L https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/jetpack-sdk-latest.tar.gz | tar xvzC mozilla && \
-	ln -s /home/wappalyzer/mozilla/addon-sdk-*/bin/cfx bin/cfx"
+RUN su wappalyzer -c "cd $WAPPALYZER_NODE_PATH && npm i"
 
 
 # PhantomJS
